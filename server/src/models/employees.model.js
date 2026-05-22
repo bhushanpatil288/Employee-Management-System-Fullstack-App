@@ -6,6 +6,11 @@ const employeeSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   phone: {
     type: String,
     required: true,
@@ -20,6 +25,10 @@ const employeeSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  password: {
+    type: String,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model('employees', employeeSchema);
