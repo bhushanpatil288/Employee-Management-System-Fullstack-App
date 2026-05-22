@@ -6,7 +6,8 @@ export const fetchEmployees = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await fetchEmployeesApi();
-      return response.data;
+      console.log("Response data", response.data);
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data?.message || 'Something went wrong');
     }
