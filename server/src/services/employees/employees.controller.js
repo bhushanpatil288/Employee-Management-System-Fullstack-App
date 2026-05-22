@@ -10,7 +10,9 @@ const addEmployee = asyncHandler(async (req, res) => {
   if (!parsed.success) {
     return res
       .status(400)
-      .json(new ApiError(400, 'Validation failed', parsed.error.issues[0].message));
+      .json(
+        new ApiError(400, 'Validation failed', parsed.error.issues[0].message)
+      );
   }
 
   const data = await employeesModel.create(parsed.data);
@@ -18,4 +20,13 @@ const addEmployee = asyncHandler(async (req, res) => {
   return res.status(201).json(new ApiResponse(201, 'New employee added', data));
 });
 
-module.exports = { addEmployee };
+const removeEmployee = asyncHandler(async (req, res) => {
+  const { id } = req.body;
+  if (id) {
+    const deleted = await employeesModel.findByIdAndDelete(id);
+    return res.status(202).json(new ApiResponse(202, 'Recieved', deleted));
+  }
+  return res.status(400).json(new ApiError(400, 'Id is required', null));
+});
+
+module.exports = { addEmployee, removeEmployee };
