@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './Layout';
-import Home from './pages/Home';
+import { Home, EmployeeList, AddEmployees } from './pages';
 
 export default function App() {
   return (
@@ -8,6 +8,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/add-employees" element={<AddEmployees />} />
+          <Route path="/employees-list" element={<EmployeeList />} />
         </Route>
       </Routes>
     </BrowserRouter>
