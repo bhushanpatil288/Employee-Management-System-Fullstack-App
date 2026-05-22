@@ -16,11 +16,11 @@ function Layout() {
       )}
 
       {/* Sidebar - hidden on mobile unless open */}
-      <div className={`fixed inset-y-0 left-0 z-30 transform lg:static lg:translate-x-0 transition-transform duration-300 w-[280px] lg:w-1/4 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className={`fixed inset-y-0 left-0 z-30 transform lg:static lg:translate-x-0 transition-transform duration-300 w-[280px] lg:w-1/6 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <Sidebar onClose={() => setIsSidebarOpen(false)} />
       </div>
 
-      <main className='flex-1 flex flex-col h-screen overflow-hidden w-full lg:w-3/4'>
+      <main className='flex-1 flex flex-col h-screen overflow-hidden w-full lg:w-5/6'>
         {/* Mobile Header with Hamburger Menu */}
         <div className="lg:hidden p-4 bg-white border-b border-slate-200 flex items-center justify-between z-10">
           <div className="flex items-center gap-3">
