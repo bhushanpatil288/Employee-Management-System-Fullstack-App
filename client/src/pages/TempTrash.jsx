@@ -1,14 +1,8 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteEmployee, fetchEmployees } from '../store/employeeThunk';
 
-function EmployeeList() {
-  const { employees, loading, error } = useSelector((state) => state.employees);
+function TempTrash() {
+  const { employees, deletedEmployees, loading, error } = useSelector((state) => state.employees);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchEmployees());
-  }, [dispatch]);
 
   if (loading) {
     return (
@@ -34,8 +28,8 @@ function EmployeeList() {
     <div className="p-6 lg:p-8 max-w-7xl mx-auto h-full flex flex-col">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl lg:text-3xl font-extrabold text-slate-800 tracking-tight">Employee Directory</h1>
-          <p className="text-slate-500 text-sm mt-1">Manage your team members and their information.</p>
+          <h1 className="text-2xl lg:text-3xl font-extrabold text-slate-800 tracking-tight">Trash</h1>
+          <p className="text-slate-500 text-sm mt-1">Restore your team members and their information.</p>
         </div>
       </div>
 
@@ -60,13 +54,13 @@ function EmployeeList() {
                       <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-4 text-slate-400">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                       </div>
-                      <p className="text-base font-medium text-slate-600 mb-1">No employees found</p>
-                      <p className="text-sm">Click "Add employees" to get started!</p>
+                      <p className="text-base font-medium text-slate-600 mb-1">No deleted employees found</p>
+                      <p className="text-sm">Deleted employees can be restored from here</p>
                     </div>
                   </td>
                 </tr>
               ) : (
-                employees.map((employee, idx) => (
+                deletedEmployees.map((employee, idx) => (
                   <tr key={employee._id} className="hover:bg-slate-50/50 transition-colors">
                     <td className="px-6 py-4 font-medium text-slate-500">
                       {idx + 1}
@@ -115,4 +109,4 @@ function EmployeeList() {
   )
 }
 
-export default EmployeeList
+export default TempTrash;

@@ -13,7 +13,11 @@ const SIDEBAR_MENU_ITEMS = [
   {
     name: "Employees List",
     path: "/employees-list"
-  }
+  },
+  {
+    name: "Trash (Tempororay)",
+    path: "/temp-trash",
+  },
 ]
 
 function Sidebar({ onClose }) {

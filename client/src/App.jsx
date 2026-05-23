@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './Layout';
-import { Home, EmployeeList, AddEmployees } from './pages';
+import { Home, EmployeeList, AddEmployees, TempTrash } from './pages';
 
 export default function App() {
   return (
@@ -10,6 +10,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/add-employees" element={<AddEmployees />} />
           <Route path="/employees-list" element={<EmployeeList />} />
+          <Route path="/temp-trash" element={<TempTrash />} />
         </Route>
       </Routes>
     </BrowserRouter>
