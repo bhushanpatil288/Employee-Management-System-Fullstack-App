@@ -4,9 +4,12 @@ A full-stack MERN application for managing employees with CRUD operations. Built
 
 ## Features
 ✅ Create, Read, Update, Delete employees  
-✅ Employee details: name, phone, position (manager/developer/designer/tester), salary  
+✅ Employee details: name, email, phone, position (manager/developer/designer/tester), salary  
 ✅ RESTful API with proper error handling  
 ✅ Modern React UI with Vite + Tailwind CSS  
+✅ State management with Redux Toolkit  
+✅ Form validation with React Hook Form and backend Zod validation  
+✅ Toast notifications with React Hot Toast  
 ✅ Code quality tools: ESLint, Prettier  
 ✅ MongoDB integration with Mongoose  
 
@@ -19,12 +22,16 @@ A full-stack MERN application for managing employees with CRUD operations. Built
 
 **Frontend:**
 - React 19 + Vite
-- Tailwind CSS
+- Redux Toolkit (State Management)
+- React Router DOM (Routing)
+- Tailwind CSS (Styling)
+- React Hook Form (Forms)
+- React Hot Toast (Notifications)
 - Axios (HTTP client)
 - ESLint (Airbnb config)
 
 ## Project Structure
-```
+```text
 CrudApp/
 ├── server/                      # Backend (Express + MongoDB)
 │   ├── src/
@@ -40,7 +47,10 @@ CrudApp/
 ├── client/                      # Frontend (React + Vite)
 │   ├── src/
 │   │   ├── api/                # API calls (axios)
-│   │   ├── App.jsx             # Main component
+│   │   ├── pages/              # React pages & UI components
+│   │   ├── store/              # Redux slices and thunks
+│   │   ├── App.jsx             # Main routing component
+│   │   ├── Layout.jsx          # UI Layout wrapper
 │   │   └── index.css           # Tailwind styles
 │   ├── index.html
 │   ├── vite.config.js
@@ -94,6 +104,7 @@ VITE_API_BASE_URL=http://localhost:8080
 ## Available Scripts
 
 **Backend:**
+- `npm start` — Start production server (`node index.js`)
 - `npm run dev` — Start dev server with Nodemon
 - `npm run lint` — Run ESLint
 - `npm run lint:fix` — Auto-fix linting issues
@@ -113,20 +124,21 @@ VITE_API_BASE_URL=http://localhost:8080
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/` | Health check |
-| GET | `/employees` | List all employees |
-| GET | `/employees/:id` | Get single employee |
-| POST | `/employees` | Create new employee |
-| PUT | `/employees/:id` | Update employee |
-| DELETE | `/employees/:id` | Delete employee |
+| GET | `/employees/list` | List all employees |
+| GET | `/employees/list/:id` | Get single employee |
+| POST | `/employees/add` | Create new employee |
+| PUT | `/employees/update` | Update employee (requires `_id` in body) |
+| DELETE | `/employees/remove/:id` | Delete employee |
 
-### Example Request (POST /employees)
+### Example Request (POST /employees/add)
 ```json
 {
   "name": "John Doe",
+  "email": "john.doe@company.com",
   "phone": "9876543210",
   "position": "developer",
-  "salary": 50000
+  "salary": 50000,
+  "password": "securepassword123"
 }
 ```
 
@@ -165,8 +177,9 @@ Centralized error handler in `errorHandler` middleware.
 
 ## Next Steps / TODOs
 - [ ] Add authentication (JWT)
-- [ ] Add input validation with Zod
-- [ ] Create frontend components (Employee List, Form, etc.)
+- [x] Add input validation with Zod
+- [x] Create frontend components (Employee List, Form, etc.)
+- [x] State management implementation (Redux Toolkit)
 - [ ] Add error boundaries in React
 - [ ] Write unit tests
 - [ ] Add pagination & filtering
