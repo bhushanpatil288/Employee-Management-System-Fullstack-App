@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { addEmployee } from "../store/employeeThunk";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function AddEmployees() {
   const { register, handleSubmit, formState: { errors }, } = useForm();
@@ -9,12 +10,15 @@ function AddEmployees() {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    try {
-      dispatch(addEmployee(data));
-      navigate('/employees-list');
-    } catch (error) {
-      console.error('Error adding employee:', error);
-    }
+    dispatch(addEmployee(data))
+      .unwrap()
+      .then(() => {
+        toast.success('Employee added successfully!');
+        navigate('/employees-list');
+      })
+      .catch((err) => {
+        toast.error(err || 'Failed to add employee');
+      });
   };
 
   return (

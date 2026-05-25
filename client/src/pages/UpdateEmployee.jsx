@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { employeeDetails } from "../api/api";
 import { updateEmployee } from "../store/employeeThunk";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 function UpdateEmployee() {
   const { id } = useParams();
@@ -34,12 +35,15 @@ function UpdateEmployee() {
   }, [id, reset]);
 
   const onSubmit = (data) => {
-    try {
-      dispatch(updateEmployee({ ...data, _id: id }));
-      navigate("/employees-list");
-    } catch (error) {
-      console.error("Error updating employee:", error);
-    }
+    dispatch(updateEmployee({ ...data, _id: id }))
+      .unwrap()
+      .then(() => {
+        toast.success('Employee updated successfully!');
+        navigate("/employees-list");
+      })
+      .catch((err) => {
+        toast.error(err || 'Failed to update employee');
+      });
   };
 
   if (loading) {
