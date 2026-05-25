@@ -34,4 +34,29 @@ const employeeList = asyncHandler(async (_, res) => {
   return res.status(200).json(new ApiResponse(200, 'All employees', employees));
 })
 
-module.exports = { addEmployee, removeEmployee, employeeList };
+const employeeDetails = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json(new ApiError(400, 'Employee ID is required', null));
+  }
+  const employee = await employeesModel.findById(id);
+  if (!employee) {
+    return res.status(404).json(new ApiError(404, 'Employee not found', null));
+  }
+  return res.status(200).json(new ApiResponse(200, 'Employee details', employee));
+})
+
+const updateEmployee = asyncHandler(async (req, res) => {
+  const { _id, ...data } = req.body;
+  const id = _id;
+  if (!id) {
+    return res.status(400).json(new ApiError(400, 'Employee ID is required', null));
+  }
+  const updated = await employeesModel.findByIdAndUpdate(id, data, { new: true });
+  if (!updated) {
+    return res.status(404).json(new ApiError(404, 'Employee not found', null));
+  }
+  return res.status(200).json(new ApiResponse(200, 'Employee updated successfully', updated));
+})
+
+module.exports = { addEmployee, removeEmployee, employeeList, updateEmployee, employeeDetails };

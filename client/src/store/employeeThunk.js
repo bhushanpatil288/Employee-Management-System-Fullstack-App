@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchEmployees as fetchEmployeesApi, addEmployee as addEmployeeApi, removeEmployee } from '../api/api';
+import { fetchEmployees as fetchEmployeesApi, addEmployee as addEmployeeApi, removeEmployee, updateEmployee as updateEmployeeApi } from '../api/api';
 
 export const fetchEmployees = createAsyncThunk(
   'employees/fetchEmployees',
@@ -33,6 +33,18 @@ export const deleteEmployee = createAsyncThunk(
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data?.message || 'Failed to delete');
+    }
+  },
+);
+
+export const updateEmployee = createAsyncThunk(
+  'employees/updateEmployee',
+  async (employeeData, thunkAPI) => {
+    try {
+      const response = await updateEmployeeApi(employeeData);
+      return response.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || 'Failed to update');
     }
   },
 );
