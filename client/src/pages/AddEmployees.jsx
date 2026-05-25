@@ -162,6 +162,7 @@ function AddEmployees() {
               <input
                 type="password"
                 placeholder="••••••••"
+                autoComplete="new-password"
                 className={`w-full px-4 py-3 rounded-xl border ${errors.password ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-blue-500 focus:ring-blue-500/20'} bg-slate-50 focus:bg-white outline-none transition-all duration-200`}
                 {...register("password", {
                   required: "Password is required",

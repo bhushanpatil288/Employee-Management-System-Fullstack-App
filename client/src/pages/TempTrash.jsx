@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { deleteEmployee } from '../store/employeeThunk';
 
 function TempTrash() {
   const { employees, deletedEmployees, loading, error } = useSelector((state) => state.employees);
